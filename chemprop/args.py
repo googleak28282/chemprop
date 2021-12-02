@@ -245,6 +245,8 @@ class TrainArgs(CommonArgs):
     """Method of splitting the data into train/val/test."""
     split_sizes: Tuple[float, float, float] = (0.8, 0.1, 0.1)
     """Split proportions for train/validation/test sets."""
+    split_key_molecule: int = 0
+    """The index of the key molecule used for splitting when multiple molecules are present and constrained split_type is used, like scaffold_balanced or random_with_repeated_smiles."""
     num_folds: int = 1
     """Number of folds when performing cross validation."""
     folds_file: str = None
