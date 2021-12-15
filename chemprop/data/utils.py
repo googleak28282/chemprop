@@ -508,7 +508,7 @@ def split_data(data: MoleculeDataset,
     elif split_type == 'scaffold_balanced':
         return scaffold_split(data, sizes=sizes, balanced=True, key_molecule_index=key_molecule_index, seed=seed, logger=logger)
 
-    elif split_type == 'random_with_repeated_smiles': # Use to constrain data with the same smiles go in the same split. Considers first molecule only.
+    elif split_type == 'random_with_repeated_smiles': # Use to constrain data with the same smiles go in the same split.
         smiles_dict=defaultdict(set)
         for i,smiles in enumerate(data.smiles()):
             smiles_dict[smiles[key_molecule_index]].add(i)

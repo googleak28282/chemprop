@@ -72,16 +72,14 @@ def scaffold_split(data: MoleculeDataset,
     """
     assert sum(sizes) == 1
 
-    if data.number_of_molecules > 1:
-        raise ValueError('Cannot perform a scaffold split with more than one molecule per datapoint.')
-
     # Split
     train_size, val_size, test_size = sizes[0] * len(data), sizes[1] * len(data), sizes[2] * len(data)
     train, val, test = [], [], []
     train_scaffold_count, val_scaffold_count, test_scaffold_count = 0, 0, 0
 
     # Map from scaffold to index in the data
-    scaffold_to_indices = scaffold_to_smiles(data.mols(flatten=False), key_molecule_index=key_molecule_index, use_indices=True)
+    key_mols = [m[key_molecule_index] for m in data.mols(flatten=False)]
+    scaffold_to_indices = scaffold_to_smiles(key_mols, use_indices=True)
 
     # Seed randomness
     random = Random(seed)
