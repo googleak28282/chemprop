@@ -618,6 +618,8 @@ class TrainArgs(CommonArgs):
                     self.split_sizes = (self.split_sizes[0], 0., self.split_sizes[1])
                 if self.split_sizes[0] == 0.:
                     raise ValueError('Provided split size for train split must be nonzero.')
+                if self.split_sizes[1] != 0.:
+                    raise ValueError('Provided split size for validation split must be 0 because validation set is provided separately.')
                 if self.split_sizes[2] == 0.:
                     raise ValueError('Provided split size for test split must be nonzero.')
 
@@ -627,7 +629,10 @@ class TrainArgs(CommonArgs):
                 if self.split_sizes[0] == 0.:
                     raise ValueError('Provided split size for train split must be nonzero.')
                 if self.split_sizes[1] == 0.:
-                    raise ValueError('Provided split size for val split must be nonzero.')
+                    raise ValueError('Provided split size for validation split must be nonzero.')
+                if self.split_sizes[2] != 0.:
+                    raise ValueError('Provided split size for test split must be 0 because test set is provided separately.')
+
 
             else: # both separate data paths are provided
                 if self.split_sizes != (1., 0., 0.):
