@@ -243,7 +243,7 @@ class TrainArgs(CommonArgs):
     """Weights associated with each target, affecting the relative weight of targets in the loss function. Must match the number of target columns."""
     split_type: Literal['random', 'scaffold_balanced', 'predetermined', 'crossval', 'cv', 'cv-no-test', 'index_predetermined', 'random_with_repeated_smiles'] = 'random'
     """Method of splitting the data into train/val/test."""
-    split_sizes: Tuple[float, float, float] = None
+    split_sizes: List[float] = None
     """Split proportions for train/validation/test sets."""
     split_key_molecule: int = 0
     """The index of the key molecule used for splitting when multiple molecules are present and constrained split_type is used, like scaffold_balanced or random_with_repeated_smiles."""
@@ -604,7 +604,7 @@ class TrainArgs(CommonArgs):
             if sum(self.split_sizes) != 1.:
                 raise ValueError(f'Provided split sizes of {self.split_sizes} do not sum to 1.')
 
-            if len(self.split_sizes) > 3:
+            if len(self.split_sizes) not in [2,3]:
                 raise ValueError(f'Three values should be provided for train/val/test split sizes. Instead received {len(self.split_sizes)} value(s).')
 
             if self.separate_val_path is None and self.separate_test_path is None: # separate data paths are not provided
