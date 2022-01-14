@@ -1,8 +1,8 @@
 import chemprop
 
-if __name__ == '__main__':
-    freeze_support()
-    
+# if __name__ == '__main__':
+#     freeze_support()
+#     pip install git+https://github.com/bp-kelley/descriptastorus
 arguments = [
     '--data_path', '/Users/agubo/Desktop/Exercise2/trainset.csv',
     '--dataset_type', 'regression',
